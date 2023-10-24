@@ -1,4 +1,4 @@
-
+import os
 from parsers.pd.pdparser import main as pdparser
 import sys
 import json
@@ -49,7 +49,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
         for fn in filename_shas: # start reversed, oldest to newest
             separator_count = fn.strip().count('¬')
             split_line = fn.strip('¬').split('¬')
-            # print(split_line)
+            print(split_line)
             file_contents = ''
             
             if separator_count == 2:
@@ -61,6 +61,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
                     continue
 
                 all_sha_names[c] = split_line[0]
+                print("Separator count 2: assigning {} to {}".format(c, split_line[0]))
         
             elif fn[0] == '¬':
                 new_name = split_line[0]
@@ -71,7 +72,8 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
                     #print(split_line)
                     continue
 
-                all_sha_names[c] = split_line[-2]
+                all_sha_names[c] = split_line[-4]
+                print("starting with separator: assigning {} to {}".format(c, split_line[-4]))
                 
             elif separator_count == 3:
                 # print(split_line[-1])
@@ -83,13 +85,15 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
                     #print(split_line)
                     continue
 
-                all_sha_names[c] = split_line[-2]
+                all_sha_names[c] = split_line[-3]
+                print("Separator count 3: assigning {} to {}".format(c, split_line[-3]))
                 
             elif separator_count == 1:
                 continue
         
             else:
                 raise ValueError('Unknown case for file')
+ 
 
 
         all_sha_dates = {}
@@ -108,8 +112,14 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             prev_fn = all_sha_names[c]
         
         stats = {}
+
+        fname1 = subprocess.run(["echo {}".format(f)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
+        fname2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=fname1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
+        fname3 = subprocess.run(["sed 's/\//\_FOLDER_/g'"], input=fname2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
+        new_original_file_name = fname3.stdout.decode().strip()
             
         for c in sorted(all_sha_dates, key=all_sha_dates.get): # start oldest to newest
+            #print(f, c)
             new_name = all_sha_names[c]
 
             file_contents = ''
@@ -132,24 +142,19 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             with tempfile.NamedTemporaryFile(delete=False) as fp:
                 fp.write(file_contents.encode())
             
+            
             try:
                 stats = pdparser(fp.name)
                 
             except:
                 stats = {}
-            
-            
+            os.remove(fp.name) 
             stats["commit_date"] = parsed_date_str
             stats["commit_sha"] = c
 
             json_output = json.dumps(stats, indent=4)
-
-            name1 = subprocess.run(["echo {}".format(new_name)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            name2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=name1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            name3 = subprocess.run(["sed 's/\//\_FOLDER_/g'"], input=name2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            new_json_file_name = name3.stdout.decode().strip()
             
-            with open("/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + project_name + "/" + new_json_file_name + ".json", "w") as outfile:
+            with open("/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + project_name + "/" + new_original_file_name  + "_COMMIT_" + c + ".json", "w") as outfile:
                 outfile.write(json_output)
         
         
