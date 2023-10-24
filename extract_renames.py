@@ -113,7 +113,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
         
         stats = {}
 
-        fname1 = subprocess.run(["echo {}".format(f)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
+        fname1 = subprocess.run(['echo "{}"'.format(f)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
         fname2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=fname1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
         fname3 = subprocess.run(["sed 's/\//\_FOLDER_/g'"], input=fname2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
         new_original_file_name = fname3.stdout.decode().strip()
