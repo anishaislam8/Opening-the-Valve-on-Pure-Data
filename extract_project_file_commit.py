@@ -1,9 +1,5 @@
-import os
-from parsers.pd.pdparser import main as pdparser
 import sys
-import json
 from pydriller.git import Git
-import tempfile
 from datetime import datetime
 import subprocess
 
@@ -57,7 +53,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 
                 if not is_sha1(c):
                     # Edge case where line doesn't have a sha
-                    #print(split_line)
+                    ##print(split_line)
                     continue
 
                 all_sha_names[c] = split_line[0]
@@ -69,20 +65,20 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 
                 if not is_sha1(c):
                     # Edge case where line doesn't have a sha
-                    #print(split_line)
+                    ##print(split_line)
                     continue
 
                 all_sha_names[c] = split_line[-4]
                 #print("starting with separator: assigning {} to {}".format(c, split_line[-4]))
                 
             elif separator_count == 3:
-                # print(split_line[-1])
+                # #print(split_line[-1])
                 new_name = split_line[0]
                 c = split_line[-1]
 
                 if not is_sha1(c):
                     # Edge case where line doesn't have a sha
-                    #print(split_line)
+                    ##print(split_line)
                     continue
 
                 all_sha_names[c] = split_line[-3]
@@ -100,7 +96,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
         for c in all_sha_names.keys():
             commit_date = subprocess.run(['git log -1 --format=%ci {}'.format(c)], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, cwd=cwd, shell=True).stdout.decode()
             parsed_date = datetime.strptime(commit_date.strip(), '%Y-%m-%d %H:%M:%S %z')
-            
+            #parsed_date_str = parsed_date.strftime('%Y-%m-%d %H:%M:%S %z') # added this line
 
             all_sha_dates[c] = parsed_date
 
@@ -111,7 +107,6 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
                 all_sha_names[c] = prev_fn
             prev_fn = all_sha_names[c]
         
-        stats = {}
 
         fname1 = subprocess.run(['echo "{}"'.format(f)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
         fname2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=fname1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
@@ -119,48 +114,11 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
         new_original_file_name = fname3.stdout.decode().strip()
             
         for c in sorted(all_sha_dates, key=all_sha_dates.get): # start oldest to newest
-            #print(f, c)
             new_name = all_sha_names[c]
+            commit_date_str = all_sha_dates[c].strftime('%Y-%m-%d %H:%M:%S %z')
 
-            #name1 = subprocess.run(["echo {}".format(new_name)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            #name2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=name1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            #name3 = subprocess.run(["sed 's/\//\_FOLDER_/g'"], input=name2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            #new_json_file_name = name3.stdout.decode().strip()
-
-            file_contents = ''
-
-            contents1 = subprocess.run(['git show {}:"{}"'.format(c, new_name)], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, cwd=cwd, shell=True)
-            contents2 = subprocess.run(["sed 's/\\;/_SLASH_SEMICOLON_/g'"], input=contents1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            contents3 = subprocess.run(["sed 's/;#X/;\\n#X/g'"], input=contents2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            contents4 = subprocess.run(["sed 's/;#N/;\\n#N/g'"], input=contents3.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            contents5 = subprocess.run(["sed 's/; #X/;\\n#X/g'"], input=contents4.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            contents6 = subprocess.run(["sed 's/; #N/;\\n#N/g'"], input=contents5.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            contents7 = subprocess.run(["sed 's/_SLASH_SEMICOLON_/\\;/g'"], input=contents6.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            
-            file_contents = contents7.stdout.decode("utf-8", "ignore")
-                
-            commit_date = subprocess.run(['git log -1 --format=%ci {}'.format(c)], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, cwd=cwd, shell=True).stdout.decode()
-            parsed_date = datetime.strptime(commit_date.strip(), '%Y-%m-%d %H:%M:%S %z')
-            parsed_date_str = parsed_date.strftime('%Y-%m-%d %H:%M:%S %z')
-            
-            # Parse the code into intermediate representation
-            with tempfile.NamedTemporaryFile(delete=False) as fp:
-                fp.write(file_contents.encode())
-            
-            
-            try:
-                stats = pdparser(fp.name)
-                
-            except:
-                stats = {}
-            os.remove(fp.name) 
-            stats["commit_date"] = parsed_date_str
-            stats["commit_sha"] = c
-
-            json_output = json.dumps(stats, indent=4)
-            
-            with open("/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + project_name + "/" + new_original_file_name  + "_COMMIT_" + c + ".json", "w") as outfile:
-                outfile.write(json_output)
+            with open("/data/play/aislam4/thesis/pd_parsed/csvs/project_file_commit.txt", "a") as outfile:
+                outfile.write("{},{},{},{},{}\n".format(project_name, new_original_file_name, new_name, c, commit_date_str))
         
         
     # end one pd file
@@ -170,10 +128,10 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 def main(filename: str):
     project_name, main_branch = filename.split(',')
 
-    git_object = Git(f'/data/play/aislam4/thesis/pd_mirrored/{project_name}')
-    #git_object.checkout(main_branch)
+    git_object = Git(f'/data/play/aislam4/thesis/drive_pd/{project_name}')
+    git_object.checkout(main_branch)
     try:
-        get_revisions_and_run_parser(f'/data/play/aislam4/thesis/pd_mirrored/{project_name}', project_name, main_branch)
+        get_revisions_and_run_parser(f'/data/play/aislam4/thesis/drive_pd/{project_name}', project_name, main_branch)
     except:
         pass
 
