@@ -72,7 +72,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
                     #print(split_line)
                     continue
 
-                all_sha_names[c] = split_line[-4]
+                all_sha_names[c] = new_name
                 #print("starting with separator: assigning {} to {}".format(c, split_line[-4]))
                 
             elif separator_count == 3:
@@ -85,7 +85,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
                     #print(split_line)
                     continue
 
-                all_sha_names[c] = split_line[-3]
+                all_sha_names[c] = new_name
                 #print("Separator count 3: assigning {} to {}".format(c, split_line[-3]))
                 
             elif separator_count == 1:
