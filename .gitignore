@@ -3,3 +3,5 @@ output/
 local_test.txt
 stats_revisions/
 extract_renames-local.py
+extract_project_file_commit.py
+extract_renames_paths.py
