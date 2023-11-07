@@ -118,7 +118,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             commit_date_str = all_sha_dates[c].strftime('%Y-%m-%d %H:%M:%S %z')
 
             with open("/data/play/aislam4/thesis/pd_parsed/csvs/project_file_commit.txt", "a") as outfile:
-                outfile.write("{},{},{},{},{}\n".format(project_name, new_original_file_name, new_name, c, commit_date_str))
+                outfile.write("{}_COMMA_{}_COMMA_{}_COMMA_{}_COMMA_{}\n".format(project_name, new_original_file_name, new_name, c, commit_date_str))
         
         
     # end one pd file

@@ -117,10 +117,20 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
         fname2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=fname1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
         fname3 = subprocess.run(["sed 's/\//\_FOLDER_/g'"], input=fname2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
         new_original_file_name = fname3.stdout.decode().strip()
+        new_original_file_name_pd = new_original_file_name + ".pd"
             
         for c in sorted(all_sha_dates, key=all_sha_dates.get): # start oldest to newest
             #print(f, c)
             new_name = all_sha_names[c]
+            
+
+            commit_date = subprocess.run(['git log -1 --format=%ci {}'.format(c)], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, cwd=cwd, shell=True).stdout.decode()
+            parsed_date = datetime.strptime(commit_date.strip(), '%Y-%m-%d %H:%M:%S %z')
+            parsed_date_str = parsed_date.strftime('%Y-%m-%d %H:%M:%S %z')
+
+
+            with open("/data/play/aislam4/thesis/pd_parsed/csvs/project_file_revision_commitsha_commitdate.txt", "a") as outfile:
+                outfile.write("{}_COMMA_{}_COMMA_{}_COMMA_{}_COMMA_{}\n".format(project_name, new_original_file_name_pd, new_name, c, parsed_date_str))
 
             #name1 = subprocess.run(["echo {}".format(new_name)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
             #name2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=name1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
@@ -138,10 +148,6 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             contents7 = subprocess.run(["sed 's/_SLASH_SEMICOLON_/\\;/g'"], input=contents6.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
             
             file_contents = contents7.stdout.decode("utf-8", "ignore")
-                
-            commit_date = subprocess.run(['git log -1 --format=%ci {}'.format(c)], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, cwd=cwd, shell=True).stdout.decode()
-            parsed_date = datetime.strptime(commit_date.strip(), '%Y-%m-%d %H:%M:%S %z')
-            parsed_date_str = parsed_date.strftime('%Y-%m-%d %H:%M:%S %z')
             
             # Parse the code into intermediate representation
             with tempfile.NamedTemporaryFile(delete=False) as fp:
@@ -170,10 +176,10 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 def main(filename: str):
     project_name, main_branch = filename.split(',')
 
-    git_object = Git(f'/data/play/aislam4/thesis/pd_mirrored/{project_name}')
-    #git_object.checkout(main_branch)
+    git_object = Git(f'/data/play/aislam4/thesis/pd_mirrored_extracted/{project_name}')
+    git_object.checkout(main_branch)
     try:
-        get_revisions_and_run_parser(f'/data/play/aislam4/thesis/pd_mirrored/{project_name}', project_name, main_branch)
+        get_revisions_and_run_parser(f'/data/play/aislam4/thesis/pd_mirrored_extracted/{project_name}', project_name, main_branch)
     except:
         pass
 
