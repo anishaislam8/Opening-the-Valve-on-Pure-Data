@@ -1,5 +1,4 @@
 0Z3_ose/
 local_test.txt
 extract_renames-local.py
-extract_project_file_commit.py
 extract_renames_paths.py
