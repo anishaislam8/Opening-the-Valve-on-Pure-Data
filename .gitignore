@@ -1,4 +1,5 @@
 0Z3_ose/
+sqlite/additionals/
 local_test.txt
 extract_renames-local.py
 extract_renames_paths.py
