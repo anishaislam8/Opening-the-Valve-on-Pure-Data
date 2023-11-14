@@ -5,7 +5,7 @@ import pandas as pd
 import pysqlite3
 import subprocess
 import hashlib
-import time
+#import time
 
 # source of calculate_sha256(): https://unogeeks.com/python-sha256/#:~:text=In%20Python%2C%20you%20can%20use,represented%20as%20a%20hexadecimal%20string.&text=%23%20Example%20usage%3A,%3D%20%22Hello%2C%20World!%22
 def calculate_sha256(data):
@@ -25,7 +25,7 @@ folder_name = "/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + folder
 connection = pysqlite3.connect("database.db")
 c = connection.cursor()
 c.execute('BEGIN TRANSACTION')
-start = time.process_time()
+#start = time.process_time()
 for filename in os.listdir(folder_name):
     # print(filename)
     with open(os.path.join(folder_name, filename), 'r') as f: # open in readonly mode
@@ -49,11 +49,13 @@ for filename in os.listdir(folder_name):
             hash_value = calculate_sha256(content)
             
             c.execute("INSERT INTO Hashes (Hash, Content) VALUES(?,?) ON CONFLICT(Hash) DO NOTHING", (hash_value, content))
+
+
     
 connection.commit()
 connection.close()
 
 
-print(time.process_time() - start)
+#print(time.process_time() - start)
             
 

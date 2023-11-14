@@ -3,7 +3,6 @@ CREATE TABLE "Projects" (
   "Project_Name" TEXT,
   "Default_Branch" TEXT
 );
-CREATE INDEX "ix_Projects_index"ON "Projects" ("index");
 CREATE TABLE "Hashes" (
   "Hash" TEXT,
   "Content" TEXT
@@ -18,5 +17,4 @@ CREATE TABLE "Revisions" (
   "Commit_Date" TEXT,
   "Hash" TEXT
 , Commit_DateTime DATETIME);
-CREATE INDEX "ix_Revisions_index"ON "Revisions" ("index");
 CREATE INDEX "ix_Revisions_Hashes_index" ON "Revisions" ("Hash");
