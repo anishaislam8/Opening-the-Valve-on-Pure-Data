@@ -3,3 +3,8 @@ sqlite/additionals/
 local_test.txt
 extract_renames-local.py
 extract_renames_paths.py
+output/
+samples/
+extract_dag_longest_path_nx.py
+extract_paths.py
+test.py
