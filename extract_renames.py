@@ -6,6 +6,7 @@ from pydriller.git import Git
 import tempfile
 from datetime import datetime
 import subprocess
+from pathlib import Path
 
 def is_sha1(maybe_sha):
     if len(maybe_sha) != 40:
@@ -113,14 +114,10 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
         
         stats = {}
 
-        fname1 = subprocess.run(['echo "{}"'.format(f)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
-        fname2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=fname1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-        fname3 = subprocess.run(["sed 's/\//\_FOLDER_/g'"], input=fname2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-        new_original_file_name = fname3.stdout.decode().strip()
-        new_original_file_name_pd = new_original_file_name + ".pd"
+        
             
         for c in sorted(all_sha_dates, key=all_sha_dates.get): # start oldest to newest
-            #print(f, c)
+           
             new_name = all_sha_names[c]
             
 
@@ -129,13 +126,9 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             parsed_date_str = parsed_date.strftime('%Y-%m-%d %H:%M:%S %z')
 
 
-            with open("/data/play/aislam4/thesis/pd_parsed/csvs/project_file_revision_commitsha_commitdate.txt", "a") as outfile:
-                outfile.write("{}_COMMA_{}_COMMA_{}_COMMA_{}_COMMA_{}\n".format(project_name, new_original_file_name_pd, new_name, c, parsed_date_str))
+            with open("/data/play/aislam4/thesis/pd_parsed/csvs/project_file_revision_commitsha_commitdate_1.txt", "a") as outfile:
+                outfile.write("{}_COMMA_{}_COMMA_{}_COMMA_{}_COMMA_{}\n".format(project_name, f, new_name, c, parsed_date_str))
 
-            #name1 = subprocess.run(["echo {}".format(new_name)], stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            #name2 = subprocess.run(["sed 's/\.[^.]*$//'"], input=name1.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            #name3 = subprocess.run(["sed 's/\//\_FOLDER_/g'"], input=name2.stdout, stdout=subprocess.PIPE, cwd=cwd, shell=True)
-            #new_json_file_name = name3.stdout.decode().strip()
 
             file_contents = ''
 
@@ -165,9 +158,11 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 
             json_output = json.dumps(stats, indent=4)
             
-            with open("/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + project_name + "/" + new_original_file_name  + "_COMMIT_" + c + ".json", "w") as outfile:
+            new_original_file_name = f.replace("/", "_FFF_")
+            root_name = Path(new_original_file_name).stem
+            # suggestion: save the original file name extension here to avoid manual fixes later :(
+            with open("/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + project_name + "/" + root_name  + "_CMMT_" + c + ".json", "w") as outfile:
                 outfile.write(json_output)
-        
         
     # end one pd file
 
@@ -175,7 +170,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 
 def main(filename: str):
     project_name, main_branch = filename.split(',')
-
+    print(project_name)
     git_object = Git(f'/data/play/aislam4/thesis/pd_mirrored_extracted/{project_name}')
     git_object.checkout(main_branch)
     try:
@@ -187,3 +182,4 @@ def main(filename: str):
 if __name__ == "__main__":
     filename = sys.argv[1]
     main(filename)
+

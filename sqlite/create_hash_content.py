@@ -30,14 +30,6 @@ for filename in os.listdir(folder_name):
     # print(filename)
     with open(os.path.join(folder_name, filename), 'r') as f: # open in readonly mode
         # read the json file
-        original_part = filename.split("_COMMIT_")[0]
-        fname1 = subprocess.run(['echo "{}"'.format(original_part)], stdout=subprocess.PIPE, shell=True)
-        fname2 = subprocess.run(["sed 's/\,/_COMMA_/g'"], input=fname1.stdout, stdout=subprocess.PIPE, shell=True)
-        fname3 = subprocess.run(["sed 's/_FOLDER_/\//g'"], input=fname2.stdout, stdout=subprocess.PIPE, shell=True)
-        new_original_file_name = fname3.stdout.decode().strip()      
-        new_original_file_name_pd = new_original_file_name + ".pd" 
-        
-        commit = filename.split("_COMMIT_")[1].split(".json")[0]
         if os.stat(os.path.join(folder_name, filename)).st_size != 0:
             
             data = json.load(f)
