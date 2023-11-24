@@ -129,7 +129,7 @@ After creating all the csv files from the above-mentioned steps, we then merge t
 
 After creating all the necessary csvs, we can then create the database by runnning the script in `sqlite/script_for_creating_database.sh`. The python files which are run in this script are:
 
-- `create_new_database.py` : This file creates a new sqlite database called `database.db` and inserts four table in this database called `Projects`, `Revisions`, `Authors`, `Commit_Messages`. The python file utilizes the csv files creating in step 1-5 to create the tables.
+- `create_new_database.py` : This file creates a new sqlite database called `database.db` and inserts four table in this database called `Projects`, `Revisions`, `Authors`, and `Commit_Messages`. The python file utilizes the csv files created in steps 1-5 to create the tables.
 - `update_revisions_and_add_indices.py` : This file adds a DATETIME column of the commit date in the `Revision` table and adds necessary indices.
 - `create_hash_table.py` : This file creates a new table called `Hashes`. This table stores the unique SHA-256 hash ids of the parsed revision files along with their parsed contents.
 - `create_hash_content.sh` : This file populates the hash table using the saved contents in the `stats_revisions` folder generated from step 1.
