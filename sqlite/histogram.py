@@ -100,5 +100,27 @@ plt.ticklabel_format(axis='x', style='plain')
 plt.xlabel('Number of Pd Files Per Project (Without Revisions)')
 plt.ylabel('Number of Projects (Log Scale)')
 plt.title('Histogram of Number of Pd Files Per Project (Without Revisions)')
+# plt.show()
+
+
+df = pd.read_csv("csvs/differences.csv")
+nodes = df['Diff_Nodes'].values
+edges = df['Diff_Edges'].values
+
+
+plt.hist(nodes, color='lightgreen', ec='black', bins=20)
+plt.yscale('log')
+plt.ticklabel_format(axis='x', style='plain')
+plt.xlabel('Difference of Nodes Per Revision File')
+plt.ylabel('Number of Files (Log Scale)')
+plt.title('Histogram of Difference of Nodes Per Revision File')
 plt.show()
 
+
+plt.hist(edges, color='lightgreen', ec='black', bins=20)
+plt.yscale('log')
+plt.ticklabel_format(axis='x', style='plain')
+plt.xlabel('Difference of Connections Per Revision File')
+plt.ylabel('Number of Files (Log Scale)')
+plt.title('Histogram of Difference of Connections Per Revision File')
+plt.show()
