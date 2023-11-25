@@ -4,7 +4,7 @@ import sys
 import subprocess
 
 folder= sys.argv[1]
-folder_name = "/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + folder
+folder_name = "/pd_parsed/stats_revisions/" + folder
 nodes_in_this_project = 0
 edges_in_this_project = 0
 
@@ -29,7 +29,7 @@ for filename in os.listdir(folder_name):
                 edges_in_this_file = 0
 
 
-            with open("/data/play/aislam4/thesis/pd_parsed/csvs/nodes_edges_per_file.csv", 'a') as f:
+            with open("/pd_parsed/csvs/nodes_edges_per_file.csv", 'a') as f:
                 f.write(folder + "," + new_original_file_name_pd + "," + commit + "," + str(nodes_in_this_file) + "," + str(edges_in_this_file))
                 f.write("\n")
             
@@ -38,7 +38,7 @@ for filename in os.listdir(folder_name):
     
 
 
-with open("/data/play/aislam4/thesis/pd_parsed/csvs/nodes_edges_per_project.csv", 'a') as f:
+with open("/pd_parsed/csvs/nodes_edges_per_project.csv", 'a') as f:
     f.write(folder + "," + str(nodes_in_this_project) + "," + str(edges_in_this_project))
     f.write("\n")
             

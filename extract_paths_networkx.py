@@ -4,9 +4,11 @@ import json
 import networkx as nx
 from pathlib import Path
 
-folder= sys.argv[1]
-print(folder)
-folder_name = "/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + folder
+# folder= sys.argv[1]
+# print(folder)
+# folder_name = "/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + folder
+
+folder_name = "sample"
 
 
 
@@ -45,39 +47,58 @@ for filename in os.listdir(folder_name):
                 G.add_nodes_from(nodes)
                 G.add_edges_from([(connection["patchline"]["source"][0], connection["patchline"]["destination"][0]) for connection in connections])
                 
-                
-                roots = [v for v, d in G.in_degree() if d == 0]
-                leaves = [v for v, d in G.out_degree() if d == 0]
-
                 longest_path = []
                 longest_path_length = -1
-                
-                for root in roots :
-                    for leaf in leaves :
-                        for path in nx.all_simple_paths(G, root, leaf) :
-                            if len(path) > longest_path_length:
-                                longest_path_length = len(path)
-                                longest_path = path
-               
-                longest_path = [object_dict[node] for node in longest_path]
-                
-                if longest_path_length == -1:
-                    with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/no_root_1.txt", "a") as outfile:
-                        outfile.write(folder + "/" + filename + "\n")
+
+                if nx.is_directed_acyclic_graph(G):
+                    # with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/dag_1.txt", "a") as outfile:
+                    #     outfile.write("1\n")
+                    longest_path = nx.dag_longest_path(G)
+                    longest_path_length = len(longest_path)
                 
                 else:
+                    # with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/cycle_2.txt", "a") as outfile:
+                    #     outfile.write("1\n")
+
+                    # cycles = list(nx.simple_cycles(G))
+                    # for cycle in cycles:
+                    #     # Find the edge to remove
+                    #     edge_to_remove = (cycle[-1], cycle[0])
+                    #     G.remove_edge(*edge_to_remove)
+                    
+                    
+                    roots = [v for v, d in G.in_degree() if d == 0]
+                    leaves = [v for v, d in G.out_degree() if d == 0]
+
+                    
+                    for root in roots :
+                        for leaf in leaves :
+                            for path in nx.all_simple_paths(G, root, leaf) :
+                                if len(path) > longest_path_length:
+                                    longest_path_length = len(path)
+                                    longest_path = path
+
                     
                 
-                    with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/paths/"+folder+"/" + new_path_file_name + ".txt", "w") as outfile:
-                        outfile.write(str(longest_path))
-                    with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/path_lengths_1.txt", "a") as outfile:
-                        outfile.write(folder + "," + new_path_file_name + "," + str(longest_path_length) + "\n")
+                longest_path = [object_dict[node] for node in longest_path]
 
-            else:
+                print(longest_path_length)
+                
+            #     if longest_path_length == -1:
+            #         with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/no_root_1.txt", "a") as outfile:
+            #             outfile.write(folder + "/" + filename + "\n")
+                
+            #     else:
+            #         with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/paths/"+folder+"/" + new_path_file_name + ".txt", "w") as outfile:
+            #             outfile.write(str(longest_path))
+            #         with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/path_lengths_1.txt", "a") as outfile:
+            #             outfile.write(folder + "," + new_path_file_name + "," + str(longest_path_length) + "\n")
 
-                with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/paths/"+folder+"/" + new_path_file_name + ".txt", "w") as outfile:
-                        outfile.write("[]")
-                with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/path_lengths_1.txt", "a") as outfile:
-                    outfile.write(folder + "," + new_path_file_name + "," + str(0) + "\n")
+            # else:
+
+            #     with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/paths/"+folder+"/" + new_path_file_name + ".txt", "w") as outfile:
+            #             outfile.write("[]")
+            #     with open("/data/play/aislam4/thesis/pd_parsed/paths_revisions/path_lengths_1.txt", "a") as outfile:
+            #         outfile.write(folder + "," + new_path_file_name + "," + str(0) + "\n")
 
                

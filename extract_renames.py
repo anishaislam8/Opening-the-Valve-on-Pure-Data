@@ -126,7 +126,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             parsed_date_str = parsed_date.strftime('%Y-%m-%d %H:%M:%S %z')
 
 
-            with open("/data/play/aislam4/thesis/pd_parsed/csvs/project_file_revision_commitsha_commitdate_1.txt", "a") as outfile:
+            with open("/pd_parsed/csvs/project_file_revision_commitsha_commitdate_1.txt", "a") as outfile:
                 outfile.write("{}_COMMA_{}_COMMA_{}_COMMA_{}_COMMA_{}\n".format(project_name, f, new_name, c, parsed_date_str))
 
 
@@ -161,7 +161,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             new_original_file_name = f.replace("/", "_FFF_")
             root_name = Path(new_original_file_name).stem
             # suggestion: save the original file name extension here to avoid manual fixes later :(
-            with open("/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + project_name + "/" + root_name  + "_CMMT_" + c + ".json", "w") as outfile:
+            with open("/pd_parsed/stats_revisions/" + project_name + "/" + root_name  + "_CMMT_" + c + ".json", "w") as outfile:
                 outfile.write(json_output)
         
     # end one pd file
@@ -171,10 +171,10 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 def main(filename: str):
     project_name, main_branch = filename.split(',')
     print(project_name)
-    git_object = Git(f'/data/play/aislam4/thesis/pd_mirrored_extracted/{project_name}')
+    git_object = Git(f'/pd_mirrored_extracted/{project_name}')
     git_object.checkout(main_branch)
     try:
-        get_revisions_and_run_parser(f'/data/play/aislam4/thesis/pd_mirrored_extracted/{project_name}', project_name, main_branch)
+        get_revisions_and_run_parser(f'/pd_mirrored_extracted/{project_name}', project_name, main_branch)
     except:
         pass
 

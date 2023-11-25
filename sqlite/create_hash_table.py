@@ -1,7 +1,7 @@
 import sqlite3
 
 #folder = sys.argv[1]
-#folder_name = "/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + folder
+#folder_name = "/pd_parsed/stats_revisions/" + folder
 
 connection = sqlite3.connect("database.db")
 c = connection.cursor()

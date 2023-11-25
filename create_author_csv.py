@@ -2,7 +2,7 @@
 import pandas as pd
 import hashlib
 
-filename = "/data/play/aislam4/thesis/pd_parsed/author_commit_message/author/authors_unique.csv"
+filename = "/pd_parsed/author_commit_message/author/authors_unique.csv"
 
 commits = []
 author_names = []
@@ -45,5 +45,5 @@ with open(filename, 'r', encoding="utf-8", errors='ignore') as f: # open in read
 
 
 df = pd.DataFrame(list(zip(commits, author_names, author_emails, committer_names, committer_emails)), columns =['Commit_SHA', 'Author_Name', 'Author_Email', 'Committer_Name', 'Committer_Email'])
-df.to_csv("/data/play/aislam4/thesis/pd_parsed/csvs/authors_hashed.csv", index=False)
+df.to_csv("/pd_parsed/csvs/authors_hashed.csv", index=False)
 

@@ -20,7 +20,7 @@ def calculate_sha256(data):
 
 folder= sys.argv[1]
 print(folder)
-folder_name = "/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + folder
+folder_name = "/pd_parsed/stats_revisions/" + folder
 
 connection = pysqlite3.connect("database.db")
 c = connection.cursor()

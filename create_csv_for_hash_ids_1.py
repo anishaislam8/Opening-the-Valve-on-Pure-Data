@@ -16,7 +16,7 @@ def calculate_sha256(data):
 
 folder= sys.argv[1]
 print(folder)
-folder_name = "/data/play/aislam4/thesis/pd_parsed/stats_revisions/" + folder
+folder_name = "/pd_parsed/stats_revisions/" + folder
 
 
 for filename in os.listdir(folder_name):
@@ -49,7 +49,7 @@ for filename in os.listdir(folder_name):
             # assign the commit to the commit_sha column
             commit_sha = commit
 
-            with open("/data/play/aislam4/thesis/pd_parsed/csvs/redo/project_file_commit_hash1.txt", "a") as outfile:
+            with open("/pd_parsed/csvs/redo/project_file_commit_hash1.txt", "a") as outfile:
                 outfile.write("{},{},{},{}\n".format(project_name, file_name, commit_sha, hash_value))
 
             
