@@ -33,7 +33,7 @@ The parsed content of the files are saved in the `stats_revisions/<<project_name
 
 `<<original_PD_filename_modified>>_CMMT_<<commit_sha>>.json`
 
-Note that the original pd file name has been modified to replace the **/** sign in the filename to **\_FFF\_** without the extension. To save time in manual post-processing, keep the extension name.
+Note that the original pd file name has been modified to replace the **/** sign in the filename to **\_FFF\_** without the extension. To save time in manual post-processing, keep the extension name and edit the other scripts as needed according to your file name.
 
 
 ### 2. `create_csvs_for_hash_ids.py`
