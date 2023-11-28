@@ -9,15 +9,20 @@ This file i) creates the `project_file_revision_commitsha_commitdate_final.csv` 
 #### Creating the initial version of the revision csv:
 If you are running parallel scripts for faster processing, then merge the files to create the final csv, and add appropriate header. For example:
 
-`cat project_file_revision_commitsha_commitdate_1.csv >> project_file_revision_commitsha_commitdate_final.csv`
+`cat project_file_revision_commitsha_commitdate_1.csv >> project_file_revision_commitsha_commitdate.csv`
 
-`cat project_file_revision_commitsha_commitdate_2.csv >> project_file_revision_commitsha_commitdate_final.csv`
+`cat project_file_revision_commitsha_commitdate_2.csv >> project_file_revision_commitsha_commitdate.csv`
+
+Add a postprocessing step for replacing the \_COMMA\_ with , to conform with the csv formatting.
+
+`cat project_file_revision_commitsha_commitdate.csv | sed 's/\,/_COMMAFILE_/g' | sed 's/_COMMA_/\,/g' | sed 's/_COMMAFILE_/_COMMA_/g' > project_file_revision_commitsha_commitdate_final.csv`
+
 
 Add a header line in the merged csv : 
 **Project_Name,File,Revision,Commit_SHA,Commit_Date**
 
 1. **Project_Name**: Name of the PD Project
-2. **File**: Original PD file name extracted from the commit ids.
+2. **File**: Original PD file name extracted from the commit ids (, in the filename is replaced with \_COMMA\_)
 3. **Revision**: Revision file name that is associated with the commit ids of a particular PD file.
 4. **Commit_SHA**: Commit ID
 5. **Commit_Date**: Date and Time of the commit
@@ -28,7 +33,7 @@ The parsed content of the files are saved in the `stats_revisions/<<project_name
 
 `<<original_PD_filename_modified>>_CMMT_<<commit_sha>>.json`
 
-Note that the original pd file name has been modified to replace the **/** sign in the filename to **\_FFF\_**.
+Note that the original pd file name has been modified to replace the **/** sign in the filename to **\_FFF\_** without the extension. To save manual post-processing, keep the extension name.
 
 
 ### 2. `create_csvs_for_hash_ids.py`
@@ -37,29 +42,28 @@ After creating the parsed contents of the Pure Data files, we move on to saving 
 
 If you are running parallel scripts for faster processing, then merge the files to create the final csv, and add appropriate header. For example:
 
-`cat project_file_commit_hash1.csv >> all_hashes.csv`
+`cat project_file_commit_hash1.txt >> all_hashes.csv`
 
-`cat project_file_commit_hash2.csv >> all_hashes.csv`
+`cat project_file_commit_hash2.txt >> all_hashes.csv`
 
 Add a header line in the merged csv : 
 **Project_Name,File,Commit_SHA,Hash**
 
 1. **Project_Name**: Name of the PD Project
-2. **File**: Original PD file name extracted from the commit ids.
+2. **File**: Original PD file name extracted from the commit ids (, in the filename is replaced with \_COMMA\_)
 3. **Commit_SHA**: Commit ID
-4. **Hash**: SHA-256 hash value of the parsed contents.
+4. **Hash**: SHA-256 hash value of the parsed contents
 
 
 ### 3. `nodes_edges.py`
 
 This csv saves the nodes and edges information per PD file and per project.
 
-
 Add a header line in the `nodes_edges_per_file.csv` : 
 **Project_Name,File,Commit_SHA,Nodes,Edges**
 
 1. **Project_Name**: Name of the PD Project
-2. **File**: Original PD file name extracted from the commit ids.
+2. **File**: Original PD file name extracted from the commit ids (, in the filename is replaced with \_COMMA\_)
 3. **Commit_SHA**: Commit ID
 4. **Nodes**: Number of nodes in the PD file
 5. **Edges**: Number of edges in the PD file
@@ -114,11 +118,11 @@ The final csvs will then contain the following information:
 After creating all the csv files from the above-mentioned steps, we then merge the necessary csvs to create the final csv which is used to populate the Revision table. We merge the `all_hashes.csv` file with `nodes_edges_per_file.csv` to create the `project_file_commitsha_hash_nodes_edges_final.csv` file. This file is merged again with the `project_file_revision_commitsha_commitdate_final.csv` created in step 1 to create the final csv for the Revision table titled `project_file_revision_commitsha_commitdate_hash_nodes_edges_final.csv`.
 
 1. **Project_Name**: Name of the PD Project
-2. **File**: Original PD file name extracted from the commit ids.
-3. **Revision**: Revision file name that is associated with the commit ids of a particular PD file.
+2. **File**: Original PD file name extracted from the commit ids (, in the filename is replaced with \_COMMA\_)
+3. **Revision**: Revision file name that is associated with the commit ids of a particular PD file
 4. **Commit_SHA**: Commit ID
 5. **Commit_Date**: Datetime string of the commit
-6. **Hash**: SHA-256 hash value of the parsed contents.
+6. **Hash**: SHA-256 hash value of the parsed contents
 7. **Nodes**: Number of nodes in the PD file
 8. **Edges**: Number of edges in the PD file
 
