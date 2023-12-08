@@ -1,5 +1,6 @@
 0Z3_ose/
 sqlite/additionals/
+not needed/
 local_test.txt
 extract_renames-local.py
 extract_renames_paths.py
@@ -7,4 +8,5 @@ output/
 sample/
 extract_dag_longest_path_nx.py
 extract_paths.py
+extract_paths_networkx.py
 test.py
