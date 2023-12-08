@@ -1,5 +1,5 @@
 #!/bin/bash
-file="pd_blobs.txt"
+file="actual_pd_blobs.txt"
 lines=$(cat $file)
 for line in $lines
 do

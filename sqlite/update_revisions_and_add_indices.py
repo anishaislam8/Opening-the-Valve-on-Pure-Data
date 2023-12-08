@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 # step 1: create/connect to database
-conn = sqlite3.connect("database.db")
+conn = sqlite3.connect("revision_hashes.db")
 c = conn.cursor()
 
 # Convert the "date_column" to datetime
@@ -31,9 +31,13 @@ conn.commit()
 c.execute('''CREATE INDEX "ix_Authors_index" ON "Authors" ("Commit_SHA");''')
 conn.commit()
 
-c.execute('''CREATE INDEX "ix_Commit_Messages_Hashes_index" ON "Commit_Messages" ("Commit_SHA");''')
+c.execute('''CREATE INDEX "ix_Commit_Messages_index" ON "Commit_Messages" ("Commit_SHA");''')
 conn.commit()
 
+c.execute('''CREATE INDEX "ix_Commit_Parents_index" ON "Commit_Parents" ("Commit_SHA");''')
+conn.commit()
 
+c.execute('''CREATE INDEX "ix_Content_Parents_index" ON "Content_Parents" ("Commit_SHA");''')
+conn.commit()
 # Close the database connection
 conn.close()
