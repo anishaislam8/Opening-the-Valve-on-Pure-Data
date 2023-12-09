@@ -151,7 +151,7 @@ For populating the remaining tables in the database, we follow the following ste
 
 1. `Revisions` and `Contents`: To populate these two tables directly in our database, at first run the sqlite/`create_content_table.py`. This python file will create these two tables in our database and add unique indices in the `Hash` column of the contents table.
 
-    Next, we use the `sqlite/extract_renames_db.py` file. This python file will calculate the revisions for each PD files for all the projects, parse the contents of the revisions of the PD files, and populate the `Revisions` and `Contents` table accordingly.
+    Next, we use the `sqlite/extract_renames_db.py` file. This python file will calculate the revisions for each PD files for all the projects, parse the contents of the revisions of the PD files, and populate the `Revisions` and `Contents` table accordingly. Note that, the file name and the revision of the PD file name is formatted to replace the , to \_COMMA\_.
 
 2. `Authors`, `Commit_Messages`, `Content_Parents`, `Projects`: Run the `sqlite/add_new_tables.py` file for inserting these tables in the database.
 
@@ -160,15 +160,9 @@ For populating the remaining tables in the database, we follow the following ste
 To Add necessary indices in our database, run `sqlite/update_revisions_and_add_indices.py`.This file adds a DATETIME column of the commit date in the `Revision` table and adds necessary indices to the existing table.
 
 
-<!-- 
-## Step 7: Data Analysis
-
-After constructing our database, we can run `sqlite/data_analysis.py` to get the statistics of our database and generate the necessary figures. -->
-
-
 ## Step 7: Answering the research questions
 We can answer our research questions by finding differences in the number of nodes and edges between each commit and their content parents by running `differences_in_nodes_and_edges.py`. This file will create a file called `differences_final.csv` which we can use to answer our research questions. 
-<!-- We can run `sqlite/rq_analysis.py` to get the results of our research questions and generate figures. -->
+
 
 
 
