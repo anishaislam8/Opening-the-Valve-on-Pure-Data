@@ -160,14 +160,15 @@ For populating the remaining tables in the database, we follow the following ste
 To Add necessary indices in our database, run `sqlite/update_revisions_and_add_indices.py`.This file adds a DATETIME column of the commit date in the `Revision` table and adds necessary indices to the existing table.
 
 
-
+<!-- 
 ## Step 7: Data Analysis
 
-After constructing our database, we can run `sqlite/data_analysis.py` to get the statistics of our database and generate the necessary figures.
+After constructing our database, we can run `sqlite/data_analysis.py` to get the statistics of our database and generate the necessary figures. -->
 
 
-## Step 8: Answering the research questions
-We can answer our research questions by finding differences in the number of nodes and edges between each commit and their content parents by running `differences_in_nodes_and_edges.py`. This file will create a file called `differences_final.csv` which we can use to answer our research questions. We can run `sqlite/rq_analysis.py` to get the results of our research questions and generate figures.
+## Step 7: Answering the research questions
+We can answer our research questions by finding differences in the number of nodes and edges between each commit and their content parents by running `differences_in_nodes_and_edges.py`. This file will create a file called `differences_final.csv` which we can use to answer our research questions. 
+<!-- We can run `sqlite/rq_analysis.py` to get the results of our research questions and generate figures. -->
 
 
 
