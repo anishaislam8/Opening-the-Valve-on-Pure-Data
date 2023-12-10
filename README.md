@@ -107,6 +107,10 @@ cd pd_mirrored/zzsnzmn_puredata-sampler
 git show a2f917add8664dc59ff285ddfb589bc5e9486503:"sampler.pd"
 ```
 
+The format of this command is: 
+
+`git show <commit_sha>:<revision_of_a_pd_file_name_from_the_Revision_column>`
+
 ## 6. How to manually parse the contents of a PD file
 
 Our PD file parser is stored in the `parsers/pd/pdparser.py` file. We can pass a PD file manually to this parser and get the parsed contents of the file. To get the parsed contents of a PD file, we can run
