@@ -11,3 +11,4 @@ extract_paths.py
 extract_paths_networkx.py
 test.py
 analysis/
+figures/
