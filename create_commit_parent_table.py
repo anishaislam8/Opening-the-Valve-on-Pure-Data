@@ -2,7 +2,7 @@ import os
 import sys
 
 file_name = sys.argv[1]
-folder_name = "/data/play/aislam4/thesis/pd_parsed/parents"
+folder_name = "parents"
 file_name = file_name + ".txt"
 
 with open(os.path.join(folder_name, file_name), 'r') as f: 
@@ -17,11 +17,11 @@ with open(os.path.join(folder_name, file_name), 'r') as f:
         parent_sha = data[1:]
         
         if len(parent_sha) == 0:
-            with open("/data/play/aislam4/thesis/pd_parsed/parents_scripts/parents_1.csv", "a") as outfile:
+            with open("parents_scripts/parents_1.csv", "a") as outfile:
                 outfile.write(commit_sha + ",None\n")
         else:
             for p in parent_sha:
-                with open("/data/play/aislam4/thesis/pd_parsed/parents_scripts/parents_1.csv", "a") as outfile:
+                with open("parents_scripts/parents_1.csv", "a") as outfile:
                     outfile.write(commit_sha + "," + p + "\n")
 
 
