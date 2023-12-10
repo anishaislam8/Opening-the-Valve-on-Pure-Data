@@ -1,6 +1,6 @@
 # Opening the Valve on Pure Data: Collecting the data, creating the csvs, populating the database, and the usage of the database
 
-This project contains the scripts for creating a dataset for Pure Data (PD), which consists of the following components: scripts for i) collecting the data from the World of Code, ii) collecting commit information incuding commit messages, author and committer information, commit parents and content parents, iii) constructing the database. In the following sections, we explain the usage of our database and steps for replicating our work
+This project contains the scripts for creating a dataset for Pure Data (PD), which consists of the following components: scripts for i) collecting the data from the World of Code, ii) collecting commit information incuding commit messages, author and committer information, commit parents, and content parents, iii) constructing the database. In the following sections, we explain the usage of our database and steps for replicating our work
 
 **Please make necessary modification to the folder structure in the scripts to save the files in your desired locations and run `pip install -r requirements.txt` to install the necessary dependencies**
 
@@ -38,7 +38,7 @@ JOIN Revisions r ON c.Hash = r.Hash
 WHERE r.Project_Name = "zzsnzmn_puredata-sampler" and r.File="sampler.pd" and r.Commit_SHA = "a2f917add8664dc59ff285ddfb589bc5e9486503";
 ```
 
-Additionally, you can follow [Example 1 of Step 8](#example-1-get-the-contents-of-a-revision-of-a-pd-file-given-project-name-file-name-and-commit-sha-of-that-revision) to start the sqlite3 command line interface using our provided bash script.
+Additionally, you can follow [Example 1 of Step 8](#example-1-get-the-contents-of-a-revision-of-a-pd-file-given-project-name-file-name-and-commit-sha-of-that-revision) to run this command directly using our bash script.
 
 ### Example 4: Get all authors of the project "zzsnzmn_puredata-sampler" who worked on the PD files
 ```
@@ -100,7 +100,7 @@ tar -xzf pd_mirrored.tar.gz
 ## 5. How to get the raw contents of a PD file revision "sampler.pd" from project "zzsnzmn_puredata-sampler" where the commit id of the revision is "a2f917add8664dc59ff285ddfb589bc5e9486503" using `git show`
 
 ```
-# go to the project folder
+# Go to the project folder
 cd pd_mirrored/zzsnzmn_puredata-sampler
 
 # Then run the following command
