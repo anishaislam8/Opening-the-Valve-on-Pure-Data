@@ -1,0 +1,169 @@
+{
+    "edges": 6,
+    "nodes": 7,
+    "node_types": {
+        "bng": 3,
+        "msg": 2,
+        "floatatom": 2
+    },
+    "all_objects": [
+        {
+            "box": {
+                "id": "PD-ROOT_obj-0",
+                "numinlets": 0,
+                "numoutlets": 2,
+                "text": "",
+                "fontname": "Arial",
+                "fontsize": 10,
+                "object_type": "bng",
+                "maxclass": "newobj"
+            }
+        },
+        {
+            "box": {
+                "id": "PD-ROOT_obj-1",
+                "numinlets": 1,
+                "numoutlets": 1,
+                "text": "",
+                "fontname": "Arial",
+                "fontsize": 10,
+                "object_type": "bng",
+                "maxclass": "newobj"
+            }
+        },
+        {
+            "box": {
+                "id": "PD-ROOT_obj-2",
+                "numinlets": 1,
+                "numoutlets": 1,
+                "text": "",
+                "fontname": "Arial",
+                "fontsize": 10,
+                "object_type": "bng",
+                "maxclass": "newobj"
+            }
+        },
+        {
+            "box": {
+                "id": "PD-ROOT_obj-3",
+                "numinlets": 1,
+                "numoutlets": 1,
+                "text": "7",
+                "fontname": "Arial",
+                "fontsize": 10,
+                "object_type": "msg",
+                "maxclass": "message"
+            }
+        },
+        {
+            "box": {
+                "id": "PD-ROOT_obj-4",
+                "numinlets": 1,
+                "numoutlets": 1,
+                "text": "8",
+                "fontname": "Arial",
+                "fontsize": 10,
+                "object_type": "msg",
+                "maxclass": "message"
+            }
+        },
+        {
+            "box": {
+                "id": "PD-ROOT_obj-5",
+                "numinlets": 1,
+                "numoutlets": 0,
+                "text": "0",
+                "fontname": "Arial",
+                "fontsize": 10,
+                "object_type": "floatatom",
+                "maxclass": "floatatom"
+            }
+        },
+        {
+            "box": {
+                "id": "PD-ROOT_obj-6",
+                "numinlets": 1,
+                "numoutlets": 0,
+                "text": "0",
+                "fontname": "Arial",
+                "fontsize": 10,
+                "object_type": "floatatom",
+                "maxclass": "floatatom"
+            }
+        }
+    ],
+    "connections": [
+        {
+            "patchline": {
+                "destination": [
+                    "PD-ROOT_obj-1",
+                    0
+                ],
+                "source": [
+                    "PD-ROOT_obj-0",
+                    0
+                ]
+            }
+        },
+        {
+            "patchline": {
+                "destination": [
+                    "PD-ROOT_obj-2",
+                    0
+                ],
+                "source": [
+                    "PD-ROOT_obj-0",
+                    0
+                ]
+            }
+        },
+        {
+            "patchline": {
+                "destination": [
+                    "PD-ROOT_obj-3",
+                    0
+                ],
+                "source": [
+                    "PD-ROOT_obj-1",
+                    0
+                ]
+            }
+        },
+        {
+            "patchline": {
+                "destination": [
+                    "PD-ROOT_obj-4",
+                    0
+                ],
+                "source": [
+                    "PD-ROOT_obj-2",
+                    0
+                ]
+            }
+        },
+        {
+            "patchline": {
+                "destination": [
+                    "PD-ROOT_obj-6",
+                    0
+                ],
+                "source": [
+                    "PD-ROOT_obj-3",
+                    0
+                ]
+            }
+        },
+        {
+            "patchline": {
+                "destination": [
+                    "PD-ROOT_obj-5",
+                    0
+                ],
+                "source": [
+                    "PD-ROOT_obj-4",
+                    0
+                ]
+            }
+        }
+    ]
+}
