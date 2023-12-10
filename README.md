@@ -100,11 +100,8 @@ tar -xzf pd_mirrored.tar.gz
 ## 5. How to get the raw contents of a PD file revision "sampler.pd" from project "zzsnzmn_puredata-sampler" where the commit id of the revision is "a2f917add8664dc59ff285ddfb589bc5e9486503" using `git show`
 
 ```
-# At first clone the mirror repositories contents in a destination folder
-git clone pd_mirrored/zzsnzmn_puredata-sampler <destination_folder>
-
-# Then cd into the destination folder
-cd <destination_folder>
+# go to the project folder
+cd pd_mirrored/zzsnzmn_puredata-sampler
 
 # Then run the following command
 git show a2f917add8664dc59ff285ddfb589bc5e9486503:"sampler.pd"
