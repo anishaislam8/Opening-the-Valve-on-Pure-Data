@@ -223,7 +223,7 @@ After creating the initial authors and commit messages files, we can create the 
 
  - At first find the unique lines in the `authors.csv` file using `cat authors.csv | sort -u > authors_projects_unique.csv`.
 
- - Then we filter out the unidentified or invalid author information by searching for the ,**=\_COMMA\_=\_COMMA\_=\_COMMA\_=** syntax and **unknown_COMMA_=_COMMA_unknown_COMMA_=** syntax in the `authors_projects_unique.csv` file using the following commands:
+ - Then we filter out the unidentified or invalid author information by searching for the ,**=\_COMMA\_=\_COMMA\_=\_COMMA\_=** syntax and **unknown\_COMMA\_=\_COMMA\_unknown\_COMMA\_=** syntax in the `authors_projects_unique.csv` file using the following commands:
 
     `cat authors_projects_unique.csv | grep -v unknown_COMMA_=_COMMA_unknown_COMMA_= | grep -v =_COMMA_=_COMMA_=_COMMA_= > authors_projects_unique_filtered.csv`
 
@@ -233,7 +233,7 @@ After creating the initial authors and commit messages files, we can create the 
 
     `cat authors_projects_unique_filtered_hashed.csv | cut -d "," -f 2- | sort -u > authors_filtered_hashed.csv`
 
-- - Add appropriate header to this file: 
+- Add appropriate header to this file: 
     `Commit_SHA,Author_Name,Author_Email,Committer_Name,Committer_Email` 
 
 
@@ -270,7 +270,7 @@ This csv contains:
 - **Commit_SHA** : The commit ID
 - **Commit_Parent** : The parent commit ID
 
-**At this stage, add this table to the database by selecting the commit parent specific entries (df5) from the `sqlite/add_new_tables.py` file.**
+**At this stage, add this table to the database by running the commit parent specific lines (df5) from the `sqlite/add_new_tables.py` file.**
 
 ### Extracting content parents
 
@@ -301,7 +301,7 @@ This csv contains:
 
 For populating the remaining tables in the database, we follow the following steps:
 
-1. `Revisions` and `Contents`: To populate these two tables directly in our database, at first run the sqlite/`create_content_table.py`. This python file will create these two tables in our database and add unique indices in the `Hash` column of the contents table.
+1. `Revisions` and `Contents`: To populate these two tables directly in our database, at first run the `sqlite/create_content_table.py`. This python file will create these two tables in our database and add unique index in the `Hash` column of the contents table.
 
     Next, we use the `sqlite/extract_renames_db.py` file. This python file will calculate the revisions for each PD files for all the projects, parse the contents of the revisions of the PD files, and populate the `Revisions` and `Contents` table accordingly. Note that, the file name and the revision of the PD file name is formatted to replace the , to \_COMMA\_.
 
