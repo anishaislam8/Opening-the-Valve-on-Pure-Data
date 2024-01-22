@@ -5,7 +5,7 @@ You can find all the necessary scripts mentioned below for extracting the commit
 
 ## Step 1: Extract author information and commit messages
 
-Run `./author and commit message/author_commit_message.sh` to extract the author and commit messages of all the cloned projects. 
+Run `./author_commit_message.sh` inside the `author and commit message/` directory to extract the author and commit messages of all the cloned projects. 
 
 If you are running parallel scripts for faster processing, then merge the files to create the final csv, and add appropriate header. For example:
 
@@ -26,7 +26,7 @@ After creating the initial authors and commit messages files, we can create the 
 
     `cat authors_projects_unique.csv | grep -v unknown_COMMA_=_COMMA_unknown_COMMA_= | grep -v =_COMMA_=_COMMA_=_COMMA_= > authors_projects_unique_filtered.csv`
 
-- After that, run `./author and commit message/create_filtered_author_csv.py`to get the hashed author information of the filtered author info and save the output in `authors_projects_unique_filtered_hashed.csv`.
+- After that, run `author and commit message/create_filtered_author_csv.py` to get the hashed author information of the filtered author info and save the output in `authors_projects_unique_filtered_hashed.csv`.
 
 - Finally, get the final author csv by running
 
@@ -37,7 +37,7 @@ After creating the initial authors and commit messages files, we can create the 
 
 
 ### Commit messages extraction
-Run the `./author and commit message/create_commit_message_csv.py`and the final csv file for commit messages will be automatically stored in `commit_messages_unique.csv`
+Run the `author and commit message/create_commit_message_csv.py` and the final csv file for commit messages will be automatically stored in `commit_messages_unique.csv`
 
 The final csvs will then contain the following information:
 
@@ -58,9 +58,9 @@ The final csvs will then contain the following information:
 ## Step 2: Extract commit parents and content parents
 
 ### Extracting commit parents
-- At first run `./commit parent and content parent/extract_parent_commits.sh` to extract the parent commits for all commits in each of the projects.
+- At first run `./extract_parent_commits.sh` inside the `commit parent and content parent/` directory to extract the parent commits for all commits in each of the projects.
 
-- Then, run `./commit parent and content parent/create_commit_parent_csv.py` to create the `parents.csv` file (Merge the csvs in the case of parallel execution for faster processing)
+- Then, run `commit parent and content parent/create_commit_parent_csv.py` to create the `parents.csv` file (Merge the csvs in the case of parallel execution for faster processing)
 
 - After that, run  `cat parents.csv | sort -u > parents_unique.csv` to get the final csv file that you can load into the database. Add necessary header line `Commit_SHA,Parent_SHA`
 
@@ -69,11 +69,11 @@ This csv contains:
 - **Commit_SHA** : The commit ID
 - **Commit_Parent** : The parent commit ID
 
-**At this stage, add this table to the database by running the `./commit parent and content parent/create_commit_parent_table.py` file.**
+**At this stage, add this table to the database by running the `commit parent and content parent/create_commit_parent_table.py` file.**
 
 ### Extracting content parents
 
-Run `./commit parent and content parent/create_content_parents_csv.sh` to easily access our database and create the `content_parents.csv` file which can be used to load into the database for creating the Content_Parents table.
+Run `./create_content_parents_csv.sh` inside the `commit parent and content parent/` directory to easily access our database and create the `content_parents.csv` file which can be used to load into the database for creating the Content_Parents table.
 
 Add appropriate header after generating the csv: `Project_Name,File,Commit_SHA,Content_Parent_SHA`
 
@@ -86,9 +86,9 @@ This csv contains:
 
 
 ## Step 3: Extracting the total number of commits
-- Run the `./total_commits/total_commits.sh` to generate the `total_commits.csv` file.
+- Run the `./total_commits.sh` inside the `total_commits/` directory to generate the `total_commits.csv` file.
 
-- Merge this csv with the `csvs/branch_name_CORRECT.csv` using `./total_commits/create_projects_csv.py`. This python file will generate `projects.csv` file which we can use to populate the `Projects` table in our database.
+- Merge this csv with the `csvs/branch_name_CORRECT.csv` using `total_commits/create_projects_csv.py`. This python file will generate `projects.csv` file which we can use to populate the `Projects` table in our database.
 
 This csv contains:
 - **Project_Name** : The project Name

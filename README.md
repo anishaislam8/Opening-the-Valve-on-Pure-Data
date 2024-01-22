@@ -113,16 +113,16 @@ The format of this command is:
 
 ## 6. How to manually parse the contents of a PD file
 
-Our PD file parser is stored in the `./parsing the PD file contents/parsers/pd/pdparser.py` file. We can pass a PD file manually to this parser and get the parsed contents of the file. To get the parsed contents of a PD file, we can run
+Our PD file parser is stored in the `parsing the PD file contents/parsers/pd/pdparser.py` file. We can pass a PD file manually to this parser and get the parsed contents of the file. To get the parsed contents of a PD file, we can run
 
-`python ./parsing the PD file contents/parse.py <pd_file_name>`
+`python parsing the PD file contents/parse.py <pd_file_name>`
 
-The output will be stored in the `./parsing the PD file contents/example PD file and parsed output` folder inside the file `example.json`.
+The output will be stored in the `parsing the PD file contents/example PD file and parsed output` folder inside the file `example.json`.
 
 
 ## 7. Understanding the parsed contents
 
-`./parsing the PD file contents/example PD file and parsed output/example.json` is an example parsed content of a PD file. We are saving information about nodes and edges in a JSON format in our database. 
+`parsing the PD file contents/example PD file and parsed output/example.json` is an example parsed content of a PD file. We are saving information about nodes and edges in a JSON format in our database. 
 
 - "edges" field represents the number of total connections or edges
 - "nodes" field represents the number of total objects or nodes in a PD file
