@@ -12,3 +12,5 @@ extract_paths_networkx.py
 test.py
 analysis/
 figures/
+histogram_18_Jan/
+parsers/
