@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 # step 1: load data file
-df = pd.read_csv('/data/play/aislam4/thesis/pd_parsed/csvs/parents_unique.csv')
+df = pd.read_csv('../../../csvs/parents_unique.csv')
 
 
 # step 2: clean data
