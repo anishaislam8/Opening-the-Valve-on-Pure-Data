@@ -18,7 +18,7 @@ For populating the remaining tables in the database, we follow the following ste
     - **Hash** (TEXT): SHA-256 hash value of the content of the revision of the PD file
     - **Content** (TEXT): Content of the revision of the PD file
 
-    Next, we use the `extract_revisions.py` file. This python file will extract the revisions for each PD files for all the projects, parse the contents of the revisions of the PD files, and populate the `Revisions` and `Contents` table accordingly. Note that, the file name and the revision of the PD file name is formatted to replace the , to \_COMMA\_.
+    Next, we use the `extract_revisions.py` file. This python file will extract the revisions for each PD file for all the projects, parse the contents of the revisions of the PD files, and populate the `Revisions` and `Contents` table accordingly. Note that, the file name and the revision of the PD file name is formatted to replace the , to \_COMMA\_.
 
 2. `Authors`, `Commit_Messages`, `Content_Parents`, `Projects`: Run the `add_remaining_tables.py` file for inserting these tables in the database.
 
