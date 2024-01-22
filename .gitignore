@@ -6,11 +6,6 @@ extract_renames-local.py
 extract_renames_paths.py
 output/
 sample/
-extract_dag_longest_path_nx.py
-extract_paths.py
-extract_paths_networkx.py
-test.py
 analysis/
 figures/
 histogram_18_Jan/
-parsers/
