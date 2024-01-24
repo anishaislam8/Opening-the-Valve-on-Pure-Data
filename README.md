@@ -60,7 +60,7 @@ CREATE INDEX "ix_Commit_Parents_index" ON "Commit_Parents" ("Commit_SHA");
 CREATE INDEX "ix_Content_Parents_index" ON "Content_Parents" ("Commit_SHA");
 ```
 
-![Schema of our Dataset](./images/Schema.pdf)
+[Schema of our Dataset](./images/Schema.pdf)
 
 # Usage of our database (database.db)
 
