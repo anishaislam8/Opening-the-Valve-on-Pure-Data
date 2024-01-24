@@ -1,6 +1,8 @@
 # Opening the Valve on Pure Data: usage of the database
 
-In the following sections, we explain the usage of our dataset. Our dataset is available at https://archive.org/details/Opening_the_Valve_on_Pure_Data. The db file is titled **database.db**. We have also made the mirrored PD repositories available in the same link, the file is titled **pd_mirrored.tar.gz**.
+In the following sections, we explain the usage of our dataset. Our dataset is available at https://archive.org/details/Opening_the_Valve_on_Pure_Data as a file titled: **database.db**. 
+
+We have also made the mirrored PD repositories available in the same archive.org link, the file is titled **pd_mirrored.tar.gz**.
 
 **Please make necessary modification to the folder structure in the scripts to save the files in your desired locations and run `pip install -r requirements.txt` to install the necessary dependencies**
 
