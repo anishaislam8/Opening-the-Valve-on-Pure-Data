@@ -63,7 +63,9 @@ CREATE INDEX "ix_Content_Parents_index" ON "Content_Parents" ("Commit_SHA");
 ```
 
 ![Schema of our Dataset](./images/Schema.png)
-Fig: Schema of our dataset
+<center>Fig: Schema of our dataset</center>
+<br>
+<br>
 
 # Usage of our database (database.db)
 
