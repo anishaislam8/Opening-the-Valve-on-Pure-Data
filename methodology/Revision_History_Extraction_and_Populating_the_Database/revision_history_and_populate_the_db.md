@@ -20,7 +20,7 @@ For populating the remaining tables in the database, we follow the following ste
 
     Next, we run `./extract_revisions.sh` to extract the revisions of each PD file for all the projects, parse the contents of the revisions of the PD files, and populate the `Revisions` and `Contents` tables accordingly. Note that the file name and the revision of the PD file name are formatted to replace , to \_COMMA\_.
 
-2. `Authors`, `Commit_Messages`, `Content_Parents`, `Projects`: Run the `add_remaining_tables.py` file to insert these tables in the database.
+2. `Authors`, `Commit_Messages`, `Content_Parents`, `Projects`: Run `python3 add_remaining_tables.py` to insert these tables in the database.
 
 3. `Commit_Parents`: Already inserted in the methodology step.
 

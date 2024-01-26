@@ -68,7 +68,7 @@ This csv contains the following:
 - **Commit_SHA** : The commit ID
 - **Commit_Parent** : The parent commit ID
 
-**At this stage, add this table to the database by running the `commit_parent_and_content_parent/create_commit_parent_table.py` file.**
+**At this stage, add this table to the database by running the command `python3 commit_parent_and_content_parent/create_commit_parent_table.py`**
 
 ### Extracting content parents
 
