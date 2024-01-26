@@ -63,7 +63,7 @@ CREATE INDEX "ix_Content_Parents_index" ON "Content_Parents" ("Commit_SHA");
 ```
 
 ![Schema of our Dataset](./images/Schema.png)
-<center>Fig: Schema of our dataset</center>
+<div style="text-align:center;">Fig: Schema of our dataset</div>
 <br>
 <br>
 
