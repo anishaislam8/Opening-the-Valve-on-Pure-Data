@@ -253,7 +253,7 @@ If you want to replicate our work or use the scripts to generate your own result
 
 # Citing our dataset
 
-Please cite our dataset if you use it in an academic work:
+Please cite our dataset if you use it in your projects:
 
 ```
 @inproceedings{islam2024puredata,
