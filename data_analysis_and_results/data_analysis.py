@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import sqlite3
 
-connection = sqlite3.connect("database.db")
+connection = sqlite3.connect("../database.db")
 cursor = connection.cursor()
 
 '''
