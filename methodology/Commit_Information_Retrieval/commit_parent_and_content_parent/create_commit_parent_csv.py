@@ -17,11 +17,11 @@ with open(os.path.join(folder_name, file_name), 'r') as f:
         parent_sha = data[1:]
         
         if len(parent_sha) == 0:
-            with open("parents_scripts/parents_1.csv", "a") as outfile:
+            with open("parents.csv", "a") as outfile:
                 outfile.write(commit_sha + ",None\n")
         else:
             for p in parent_sha:
-                with open("parents_scripts/parents_1.csv", "a") as outfile:
+                with open("parents.csv", "a") as outfile:
                     outfile.write(commit_sha + "," + p + "\n")
 
 

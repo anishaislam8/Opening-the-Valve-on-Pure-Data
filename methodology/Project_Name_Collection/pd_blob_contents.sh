@@ -1,3 +1,6 @@
+#!/bin/bash
+
+mkdir pd_blobs_new
 INPUT=pd_blobs.txt
 while read p; do
     cd pd_blobs_new

@@ -1,4 +1,8 @@
-INPUT=/pd_projects_final.txt
+#!/bin/bash
+
+mkdir /pd_mirrored
+mkdir /pd_mirrored_extracted
+INPUT=/pd_projects_final.txt # PD project names, replace it with your file name
 while read p; do
     project=`echo $p | sed 's/\_/\//'`
     cd /pd_mirrored

@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 # step 1: create/connect to database
-conn = sqlite3.connect("database.db")
+conn = sqlite3.connect("../../database.db")
 c = conn.cursor()
 
 # Convert the "date_column" to datetime

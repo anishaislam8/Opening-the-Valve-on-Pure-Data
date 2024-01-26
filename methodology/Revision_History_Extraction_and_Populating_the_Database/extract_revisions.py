@@ -1,4 +1,5 @@
 import os
+# fix the path to the pdparser accordingly
 from parsers.pd.pdparser import main as pdparser
 import sys
 import json
@@ -10,7 +11,8 @@ from pathlib import Path
 import pysqlite3
 import hashlib
 
-connection = pysqlite3.connect("database.db")
+# fix the database location
+connection = pysqlite3.connect("../../database.db")
 cursor = connection.cursor()
 cursor.execute('BEGIN TRANSACTION')
 

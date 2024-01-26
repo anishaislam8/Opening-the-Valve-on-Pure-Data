@@ -6,8 +6,8 @@ import subprocess
 from pathlib import Path
 import sqlite3
 
-# please fix the path to the database file
-conn = sqlite3.connect('database.db')
+# please fix the path to the database file according to your need
+conn = sqlite3.connect('../../../database.db')
 
 def is_sha1(maybe_sha):
     if len(maybe_sha) != 40:
@@ -150,13 +150,13 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
             
             new_original_file_name = f.replace(",","_COMMA_")
             if len(parents_of_c) == 0:
-                with open("content_parents_1.txt", "a") as outfile:
+                with open("content_parents.txt", "a") as outfile:
                     outfile.write("{},{},{},{}\n".format(project_name, new_original_file_name, c, c))
             else:
                 # we have a set of valid parents for c Get the node and edge count at each of these parents
                 for parent in parents_of_c:
 
-                    with open("content_parents_1.txt", "a") as outfile:
+                    with open("content_parents.txt", "a") as outfile:
                         outfile.write("{},{},{},{}\n".format(project_name, new_original_file_name, c, parent))
 
 

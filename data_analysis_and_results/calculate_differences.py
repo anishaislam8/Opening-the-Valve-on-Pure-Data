@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 import sqlite3
 
-conn = sqlite3.connect('database.db')
+conn = sqlite3.connect('../database.db')
 
 def is_sha1(maybe_sha):
     if len(maybe_sha) != 40:
@@ -161,7 +161,7 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
                     diff_edge_count += (edge_count_of_f_at_c - edge_count_of_f_at_parent)
 
             
-            with open("differences_1.csv", "a") as outfile:
+            with open("differences.csv", "a") as outfile:
                 outfile.write("{},{},{},{},{}\n".format(project_name, file_name, c, str(diff_node_count), str(diff_edge_count)))
 
 

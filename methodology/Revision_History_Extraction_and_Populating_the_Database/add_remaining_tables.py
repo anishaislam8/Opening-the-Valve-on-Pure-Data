@@ -2,10 +2,10 @@ import sqlite3
 import pandas as pd
 
 # step 1: load data file
-df = pd.read_csv('csvs/projects.csv')
-df2 = pd.read_csv('csvs/authors_filtered_hashed.csv')
-df3 = pd.read_csv('csvs/commit_messages_unique.csv')
-df4 = pd.read_csv('csvs/content_parents.csv')
+df = pd.read_csv('../../csvs/projects.csv')
+df2 = pd.read_csv('../../csvs/authors_filtered_hashed.csv')
+df3 = pd.read_csv('../../csvs/commit_messages_unique.csv')
+df4 = pd.read_csv('../../csvs/content_parents.csv')
 
 # step 2: clean data
 df.columns = df.columns.str.strip()

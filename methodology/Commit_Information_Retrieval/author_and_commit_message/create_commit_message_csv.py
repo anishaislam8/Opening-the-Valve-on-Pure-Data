@@ -10,8 +10,8 @@ def is_sha1(maybe_sha):
         return False
     return True
 
-df_project = pd.read_csv("/pd_parsed/csvs/branch_name_CORRECT.csv")
-commit_messages_file = "/pd_parsed/author_commit_message/commit_message/commit_messages.txt"
+df_project = pd.read_csv("../../../csvs/branch_name_CORRECT.csv")
+commit_messages_file = "commit_messages.txt"
 
 project_names = df_project['Project_Name'].values
 
@@ -41,18 +41,18 @@ with open(commit_messages_file, 'r', encoding="utf8", errors='ignore') as f:
 
 df = pd.DataFrame(list(zip(projects,commits, commit_messages)), columns =['Project_Name','Commit_SHA', 'Commit_Message'])
 df['Commit_Message'] = df['Commit_Message'].str.rstrip('\n')
-df.to_csv("/pd_parsed/author_commit_message/commit_message/commit_messages.csv", index=False)
+df.to_csv("commit_messages.csv", index=False)
 
 
-df = pd.read_csv("/pd_parsed/author_commit_message/commit_message/commit_messages.csv")
+df = pd.read_csv("commit_messages.csv")
 unique_df = df.drop_duplicates()
-unique_df.to_csv("/pd_parsed/author_commit_message/commit_message/commit_messages_unique_with_project.csv", index=False)
+unique_df.to_csv("commit_messages_unique_with_project.csv", index=False)
 
 # drop the project_name column
-df = pd.read_csv("/pd_parsed/author_commit_message/commit_message/commit_messages_unique_with_project.csv")
+df = pd.read_csv("commit_messages_unique_with_project.csv")
 df = df.drop(columns=['Project_Name'])
 unique_df = df.drop_duplicates()
-unique_df.to_csv("/pd_parsed/author_commit_message/commit_message/commit_messages_unique.csv", index=False)
+unique_df.to_csv("commit_messages_unique.csv", index=False)
 
 
 

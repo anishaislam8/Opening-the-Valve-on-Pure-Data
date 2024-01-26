@@ -63,9 +63,7 @@ CREATE INDEX "ix_Content_Parents_index" ON "Content_Parents" ("Commit_SHA");
 ```
 
 ![Schema of our Dataset](./images/Schema.png)
-<div style="text-align:center;">Fig: Schema of our dataset</div>
-<br>
-<br>
+Fig: Schema of our dataset
 
 # Usage of our database (database.db)
 
@@ -191,7 +189,7 @@ Note that, the *revision_name* used in the git show commands are stored in the `
 
 Our PD file parser is stored in the *parsing_the_PD_file_contents/parsers/pd/pdparser.py* file. We can pass a PD file manually to this parser and get the parsed contents of  the file. To get the parsed contents of a PD file, we can run the following command:
 
-`python parsing_the_PD_file_contents/parse.py <pd_file_name>`
+`python3 parsing_the_PD_file_contents/parse.py <pd_file_name>`
 
 The output will be stored in the *parsing_the_PD_file_contents/example_PD_file_and_parsed_output* directory inside the file `example.json`.
 
@@ -251,7 +249,7 @@ If you want to replicate our work or use the scripts to generate your own result
 
 - For extracting the revision history of each PD file and populating the database, please follow the instructions provided in `methodology/Revision_History_Extraction_and_Populating_the_Database/revision_history_and_populate_the_db.md`.
 
-- To reproduce the values used in this paper for the data analysis and results sections, please follow the instructions in `data_analysis_and_results\data_analysis_and_results.md`.
+- To reproduce the values used in this paper for the data analysis and results sections, please follow the instructions in `data_analysis_and_results/data_analysis_and_results.md`.
 
 # Citing our dataset
 

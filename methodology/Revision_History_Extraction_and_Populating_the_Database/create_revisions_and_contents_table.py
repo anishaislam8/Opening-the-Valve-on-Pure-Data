@@ -1,6 +1,7 @@
 import sqlite3
 
-connection = sqlite3.connect("database.db")
+# fix the database location
+connection = sqlite3.connect("../../database.db")
 c = connection.cursor()
 
 # # create the table
