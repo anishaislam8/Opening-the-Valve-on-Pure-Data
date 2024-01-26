@@ -67,7 +67,7 @@ Fig: Schema of our dataset
 
 # Usage of our database (database.db)
 
-## 1. Access the dataset
+## 1. How to access our dataset
 At first, download the dataset file titled: **dataset.tar.gz** available at https://archive.org/details/Opening_the_Valve_on_Pure_Data by using the following command.
 
 `wget -c https://archive.org/download/Opening_the_Valve_on_Pure_Data/dataset.tar.gz`
