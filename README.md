@@ -153,12 +153,15 @@ JOIN Revisions r ON c.Hash = r.Hash
 WHERE r.Project_Name = "zzsnzmn_puredata-sampler" AND r.File="sampler.pd" AND r.Commit_SHA = "a2f917add8664dc59ff285ddfb589bc5e9486503";
 ```
 
-## 5. How to unzip the git repos (pd_mirrored.tar.gz)
+## 5. How to download and unzip the git repos (pd_mirrored.tar.gz)
 **Note that the pd_mirrored.tar.gz file is ~242.5 GB in size**. Please make sure you have sufficient space in your system before unzipping the contents of this tar file.
 
 ```
-# At first go to your desired directory where you want to save your unzipped folder
+# At first, go to your desired directory where you want to download the tar file of the mirrored git repositories
 cd <destination_folder>
+
+# Then, download the tar file of the mirrored git repositories
+wget -c https://archive.org/download/Opening_the_Valve_on_Pure_Data/pd_mirrored.tar.gz
 
 # Then run the following command to unzip the contents of the tar file
 tar -xzf pd_mirrored.tar.gz
@@ -247,3 +250,18 @@ If you want to replicate our work or use the scripts to generate your own result
 - For extracting the revision history of each PD file and populating the database, please follow the instructions provided in `methodology/Revision_History_Extraction_and_Populating_the_Database/revision_history_and_populate_the_db.md`.
 
 - To reproduce the values used in this paper for the data analysis and results sections, please follow the instructions in `data_analysis_and_results\data_analysis_and_results.md`.
+
+# Citing our dataset
+
+Please cite our dataset if you use it in an academic work:
+
+```
+@inproceedings{islam2024puredata,
+  title = {{Opening the Valve on Pure-Data: Usage Patterns and Programming Practices of a Data-Flow-Based Visual Programming Language}},
+  author = {Islam, Anisha and Eng, Kalvin and Hindle, Abram},
+  booktitle={MSR},
+  year={2024},
+  organization={IEEE}
+},
+```
+
