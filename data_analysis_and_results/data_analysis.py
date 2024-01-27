@@ -11,7 +11,7 @@ Distribution of nodes and edges
 
 '''
 
-cursor.execute('''Select Nodes, Edges from Revisions;''')
+cursor.execute('''SELECT Nodes, Edges FROM Revisions;''')
 nodes_edges = cursor.fetchall()
 
 # Create a DataFrame
@@ -23,27 +23,27 @@ print(df["Nodes"].describe())
 print(df["Edges"].describe())
 
 
-cursor.execute('''select count(nodes) from revisions where nodes >= 1 and nodes <= 64;''')
+cursor.execute('''SELECT COUNT(nodes) FROM revisions WHERE nodes >= 1 and nodes <= 64;''')
 num_nodes_1_64 = cursor.fetchall()
 print("Number of nodes between 1 and 64: ", num_nodes_1_64)
 
-cursor.execute('''select count(edges) from revisions where edges >= 1 and edges <= 51;''')
+cursor.execute('''SELECT COUNT(edges) FROM revisions WHERE edges >= 1 and edges <= 51;''')
 num_edges_1_51 = cursor.fetchall()
 print("Number of edges between 1 and 51: ", num_edges_1_51)
 
-cursor.execute('''select count(nodes) from revisions where nodes = 0;''')
+cursor.execute('''SELECT COUNT(nodes) FROM revisions WHERE nodes = 0;''')
 num_nodes_0 = cursor.fetchall()
 print("Number of nodes = 0: ", num_nodes_0)
 
-cursor.execute('''select count(edges) from revisions where edges = 0;''')
+cursor.execute('''SELECT COUNT(edges) FROM revisions WHERE edges = 0;''')
 num_edges_0 = cursor.fetchall()
 print("Number of edges = 0: ", num_edges_0)
 
-cursor.execute('''select count(edges) from revisions where edges >= 30000;''')
+cursor.execute('''SELECT COUNT(edges) FROM revisions WHERE edges >= 30000;''')
 num_edges_gt_30000 = cursor.fetchall()
 print("Number of edges >= 30000: ", num_edges_gt_30000)
 
-cursor.execute('''select project_name, file, count(nodes) from revisions where nodes >= 30000;''')
+cursor.execute('''SELECT project_name, file, COUNT(nodes) FROM revisions WHERE nodes >= 30000;''')
 num_nodes_gt_30000 = cursor.fetchall()
 print("Number of Nodes >= 30000: ", num_nodes_gt_30000)
 
@@ -74,7 +74,7 @@ Distribution of Revisions Per PD file
 '''
 
 
-cursor.execute('''Select Project_Name, File, Count(Revision) AS Revision_Count from Revisions Where File IS NOT NULL AND FILE <> '' GROUP BY Project_Name, File;''')
+cursor.execute('''SELECT Project_Name, File, COUNT(Revision) AS Revision_Count FROM Revisions WHERE File IS NOT NULL AND FILE <> '' GROUP BY Project_Name, File;''')
 revisions = cursor.fetchall()
 
 df = pd.DataFrame(revisions, columns=['Project_Name', 'File', 'Revisions'])
@@ -98,7 +98,7 @@ Distribution of PD files per project
 '''
 
 
-cursor.execute('''Select Project_Name, Count(DISTINCT File) AS File_Count from Revisions GROUP BY Project_Name;''')
+cursor.execute('''SELECT Project_Name, COUNT(DISTINCT File) AS File_Count FROM Revisions GROUP BY Project_Name;''')
 files = cursor.fetchall()
 
 df = pd.DataFrame(files, columns=['Project_Name', 'Files'])
@@ -106,7 +106,7 @@ data = df["Files"].values
 print(df["Files"].describe())
 print(len(df[df["Files"] <= 17]))
 
-cursor.execute('''Select Project_Name, count(DISTINCT File) AS File_Count from Revisions GROUP BY Project_Name ORDER BY File_Count DESC LIMIT 3;''')
+cursor.execute('''SELECT Project_Name, COUNT(DISTINCT File) AS File_Count FROM Revisions GROUP BY Project_Name ORDER BY File_Count DESC LIMIT 3;''')
 highest_files = cursor.fetchall()
 print("Projects with highest files: ", highest_files)
 
@@ -150,14 +150,14 @@ Commits per project distribution
 '''
 
 
-cursor.execute('''select Total_Commits from Projects;''')
+cursor.execute('''SELECT Total_Commits FROM Projects;''')
 total_commits = cursor.fetchall()
 df = pd.DataFrame(total_commits, columns=['Commits'])
 df['Commits'] = df['Commits'].astype(int)
 commits = df['Commits'].values
 print(df["Commits"].describe())
 
-cursor.execute('''select count(total_commits) from projects where total_commits <= 31;''')
+cursor.execute('''SELECT COUNT(total_commits) FROM projects WHERE total_commits <= 31;''')
 commits_17 = cursor.fetchall()
 print("Projects with <=31 commits: ", commits_17)
 
@@ -179,7 +179,7 @@ Author who contributed to the PD files distribution per project
 '''
 
 
-cursor.execute('''SELECT Revisions.Project_Name, Count(DISTINCT Authors.Author_Name)
+cursor.execute('''SELECT Revisions.Project_Name, COUNT(DISTINCT Authors.Author_Name)
 FROM Revisions
 JOIN Authors ON Revisions.Commit_SHA = Authors.Commit_SHA
 WHERE Revisions.file IS NOT NULL AND Revisions.file <> ''

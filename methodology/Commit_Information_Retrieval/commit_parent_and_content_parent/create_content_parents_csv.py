@@ -1,4 +1,5 @@
 import sys
+sys.setrecursionlimit(100000)
 import json
 from pydriller.git import Git
 from datetime import datetime
@@ -6,7 +7,6 @@ import subprocess
 from pathlib import Path
 import sqlite3
 
-# please fix the path to the database file according to your need
 conn = sqlite3.connect('../../../database.db')
 
 def is_sha1(maybe_sha):
@@ -141,24 +141,25 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
         commits_which_modified_file_f = set(all_sha_names.keys()) # commits across all branches which modified file f
         
         for c in commits_which_modified_file_f:
-
-            parents_of_c = set()
-            visited_parents = set()
-            # If there is only one commit that modified this file,then this is the one and there are no parents
-            if len(commits_which_modified_file_f) > 1: 
-                get_valid_parents_recursive(c, parents_of_c, commits_which_modified_file_f, visited_parents)
+            try:
+                parents_of_c = set()
+                visited_parents = set()
+                # If there is only one commit that modified this file,then this is the one and there are no parents
+                if len(commits_which_modified_file_f) > 1: 
+                    get_valid_parents_recursive(c, parents_of_c, commits_which_modified_file_f, visited_parents)
             
-            new_original_file_name = f.replace(",","_COMMA_")
-            if len(parents_of_c) == 0:
-                with open("content_parents.txt", "a") as outfile:
-                    outfile.write("{},{},{},{}\n".format(project_name, new_original_file_name, c, c))
-            else:
-                # we have a set of valid parents for c Get the node and edge count at each of these parents
-                for parent in parents_of_c:
+                new_original_file_name = f.replace(",","_COMMA_")
+                if len(parents_of_c) == 0:
+                    with open("content_parents.csv", "a") as outfile:
+                        outfile.write("{},{},{},{}\n".format(project_name, new_original_file_name, c, c))
+                else:
+                    # we have a set of valid parents for c Get the node and edge count at each of these parents
+                    for parent in parents_of_c:
 
-                    with open("content_parents.txt", "a") as outfile:
-                        outfile.write("{},{},{},{}\n".format(project_name, new_original_file_name, c, parent))
-
+                        with open("content_parents.csv", "a") as outfile:
+                            outfile.write("{},{},{},{}\n".format(project_name, new_original_file_name, c, parent))
+            except Exception as e:
+                print(e)
 
                 
         
@@ -169,10 +170,10 @@ def get_revisions_and_run_parser(cwd, project_name, main_branch, debug=False):
 def main(filename: str):
     project_name, main_branch = filename.split(',')
     print(project_name)
-    git_object = Git(f'pd_mirrored_extracted/{project_name}')
+    git_object = Git(f'/pd_mirrored_extracted/{project_name}')
     git_object.checkout(main_branch)
     try:
-        get_revisions_and_run_parser(f'pd_mirrored_extracted/{project_name}', project_name, main_branch)
+        get_revisions_and_run_parser(f'/pd_mirrored_extracted/{project_name}', project_name, main_branch)
     except:
         pass
     conn.close()

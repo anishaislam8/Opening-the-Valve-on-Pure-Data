@@ -10,8 +10,9 @@ edges = df['Diff_Edges'].values
 print(df['Diff_Nodes'].describe())
 print(df['Diff_Edges'].describe())
 
-print("Nodes <= 25: ", len(nodes[nodes <= 25]))
-print("Edges <= 16: ", len(edges[edges <= 16]))
+print("Nodes <= 27: ", len(nodes[nodes <= 27]))
+print("Edges <= 17: ", len(edges[edges <= 17]))
+
 
 plt.hist(nodes, color='lightgreen', ec='black', bins=20)
 plt.yscale('log')
