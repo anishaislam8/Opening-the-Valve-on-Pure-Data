@@ -77,7 +77,7 @@ At first, download the dataset file titled: **dataset.tar.gz** available at http
 ## 2. How to load the sqlite command line interface
 After downloading and extracting our database you can query it by using sqlite3 command line tools. **Please note that the size of the extracted database is ~21.3GB**, so make sure you have necessary space in your system. You can use sqlite3 (>=3.7.17) to query our database. To load the sqlite3 command line tool and query our database, go to your command line and type `sqlite3 database.db`. This will open up a sqlite3 command line interface for querying our database. Then you can run your SQL queries directly from the command line. Some examples are given below. You can exit sqlite3 the command line interface by running `.exit` on the command line.
 
-Additionally, you can follow [Example 2 of Step 9](#example-2-open-the-sqlite3-command-line-using-a-bash-script) to start the sqlite3 command line interface using our provided bash script.
+Additionally, we have provided bash scripts in [Example 2 of Step 9](#example-2-open-the-sqlite3-command-line-using-a-bash-script) to simplify utilizing the sqlite3 command line interface.
 
 ## 3. Some sample queries
 
