@@ -72,7 +72,7 @@ At first, download the dataset file titled: **dataset.tar.gz** available at http
 
 `wget -c https://archive.org/download/Opening_the_Valve_on_Pure_Data/dataset.tar.gz`
 
-**Please note that the size of the dataset.tar.gz file is is ~1.0 GB**, so make sure you have necessary space in your system. After that, move the file in the same directory as this README file and unzip the file using the command: `tar -xzf dataset.tar.gz`. This command will unzip the tar file and extract the `database.db` file.
+**Please note that the size of the dataset.tar.gz file is ~1.0 GB**, so make sure you have necessary space in your system. After that, move the file in the same directory as this README file and unzip the file using the command: `tar -xzf dataset.tar.gz`. This command will unzip the tar file and extract the `database.db` file.
 
 ## 2. How to load the sqlite command line interface
 After downloading and extracting our database you can query it by using sqlite3 command line tools. **Please note that the size of the extracted database is ~21.3GB**, so make sure you have necessary space in your system. You can use sqlite3 (>=3.7.17) to query our database. To load the sqlite3 command line tool and query our database, go to your command line and type `sqlite3 database.db`. This will open up a sqlite3 command line interface for querying our database. Then you can run your SQL queries directly from the command line. Some examples are given below. You can exit sqlite3 the command line interface by running `.exit` on the command line.
@@ -253,7 +253,7 @@ If you want to replicate our work or use the scripts to generate your own result
 
 # Citing our dataset
 
-Please cite our dataset if you use it in your projects:
+Please cite our paper if you use our dataset in your projects:
 
 ```
 @inproceedings{islam2024puredata,
@@ -261,7 +261,7 @@ Please cite our dataset if you use it in your projects:
   author = {Islam, Anisha and Eng, Kalvin and Hindle, Abram},
   booktitle={MSR},
   year={2024},
-  organization={IEEE}
-},
+  organization={IEEE/ACM}
+}
 ```
 
