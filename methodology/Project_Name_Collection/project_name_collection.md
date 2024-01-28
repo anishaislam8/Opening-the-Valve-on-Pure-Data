@@ -31,7 +31,7 @@
 
     `git clone https://:@github.com/<project_name> pd_projects/<project_name>`
 
-    To get a list of the downloaded projects, run `ls pd_projects | wc -l > downloaded_pd_projects.txt`
+    To get a list of the downloaded projects, run `ls pd_projects > downloaded_pd_projects.txt`
 
 8. Run the command `./project_files.sh` to get the file names of the current repository.
 
