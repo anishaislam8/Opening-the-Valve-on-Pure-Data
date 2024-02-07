@@ -1,6 +1,6 @@
 # Opening the Valve on Pure Data: usage of the database
 
-In the following sections, we explain the usage of our dataset. Our dataset is available at https://archive.org/details/Opening_the_Valve_on_Pure_Data as a file titled: **dataset.tar.gz**. 
+In the following sections, we explain the usage of our dataset. Our dataset is available at https://archive.org/details/Opening_the_Valve_on_Pure_Data and at https://zenodo.org/records/10576757 as a file titled: **dataset.tar.gz**. 
 
 We have also made the mirrored PD repositories available in the same archive.org link, the file is titled **pd_mirrored.tar.gz**.
 
@@ -72,10 +72,12 @@ At first, download the dataset file titled: **dataset.tar.gz** available at http
 
 `wget -c https://archive.org/download/Opening_the_Valve_on_Pure_Data/dataset.tar.gz`
 
-**Please note that the size of the dataset.tar.gz file is ~1.0 GB**, so make sure you have necessary space in your system. After that, move the file in the same directory as this README file and unzip the file using the command: `tar -xzf dataset.tar.gz`. This command will unzip the tar file and extract the `database.db` file.
+You can also download the file from the Zenodo link given above.
+
+**Please note that the size of the dataset.tar.gz file is ~1.0 GB**, so make sure you have necessary space in your system. After that, move the file in the same directory as this README file and unzip the file using the command: `tar -xzf dataset.tar.gz`. This command will unzip the tar file and extract the `database.db` file. **Please note that the size of the extracted database is ~21.3GB**, so make sure you have necessary space in your system.
 
 ## 2. How to load the sqlite command line interface
-After downloading and extracting our database you can query it by using sqlite3 command line tools. **Please note that the size of the extracted database is ~21.3GB**, so make sure you have necessary space in your system. You can use sqlite3 (>=3.7.17) to query our database. To load the sqlite3 command line tool and query our database, go to your command line and type `sqlite3 database.db`. This will open up a sqlite3 command line interface for querying our database. Then you can run your SQL queries directly from the command line. Some examples are given below. You can exit sqlite3 the command line interface by running `.exit` on the command line.
+After downloading and extracting our database you can query it by using sqlite3 command line tools. You can use sqlite3 (>=3.7.17) to query our database. To load the sqlite3 command line tool and query our database, go to your command line and type `sqlite3 database.db`. This will open up a sqlite3 command line interface for querying our database. Then you can run your SQL queries directly from the command line. Some examples are given below. You can exit sqlite3 the command line interface by running `.exit` on the command line.
 
 Additionally, we have provided bash scripts in [Example 2 of Step 9](#example-2-open-the-sqlite3-command-line-using-a-bash-script) to simplify utilizing the sqlite3 command line interface.
 
@@ -256,12 +258,12 @@ If you want to replicate our work or use the scripts to generate your own result
 Please cite our paper if you use our dataset in your projects:
 
 ```
-@inproceedings{islam2024puredata,
-  title = {{Opening the Valve on Pure-Data: Usage Patterns and Programming Practices of a Data-Flow-Based Visual Programming Language}},
+@inproceedings{islam2024opening,
+  title={{Opening the Valve on Pure-Data: Usage Patterns and Programming Practices of a Data-Flow Based Visual Programming Language}},
   author = {Islam, Anisha and Eng, Kalvin and Hindle, Abram},
-  booktitle={MSR},
+  booktitle={2024 IEEE/ACM 21st International Conference on Mining Software Repositories (MSR)},
   year={2024},
-  organization={IEEE/ACM}
+  organization={IEEE}
 }
 ```
 
